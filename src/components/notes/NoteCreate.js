@@ -1,7 +1,7 @@
 import React from 'react'
 import NoteForm from './NoteForm'
 
-const NoteEdit = ({ onNoteAdd }) => {
+const NoteCreate = ({ onNoteAdd }) => {
   return (
     <div>
       <h3>Create a Note</h3>
@@ -10,4 +10,4 @@ const NoteEdit = ({ onNoteAdd }) => {
   )
 }
 
-export default NoteEdit
+export default NoteCreate

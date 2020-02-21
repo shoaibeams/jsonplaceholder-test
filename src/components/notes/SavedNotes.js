@@ -24,6 +24,7 @@ export default class SavedNotes extends React.Component {
 
   render() {
     let { notes, searchValue } = this.state
+
     notes =
       notes.filter(note =>
         note.subject.toLowerCase().includes(searchValue.toLowerCase())
@@ -33,7 +34,13 @@ export default class SavedNotes extends React.Component {
         <h2 className="app-header">Notes</h2>
         <NoteSearch onSearch={text => this.handleSearch(text)} />
         {notes.length > 0 ? (
-          notes.map(note => <Note note={note} key={note.id} />)
+          notes.map(note => (
+            <Note
+              note={note}
+              key={note.id}
+              handleNoteDelete={this.props.handleNoteDelete}
+            />
+          ))
         ) : (
           <Link
             to="/notes/new"

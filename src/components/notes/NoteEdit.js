@@ -1,24 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import NoteForm from './NoteForm'
-// import _ from 'lodash'
+import { withRouter } from 'react-router-dom'
 
-class NoteEdit extends Component {
-  onSubmit = formValues => {
-    this.props.editStream(this.props.match.params.id, formValues)
-  }
-
-  render() {
-    return (
-      <div>
-        <h3>Edit Your Note</h3>
-        <NoteForm />
-        {/* <StreamForm
-          initialValues={_.pick(this.props.stream, 'title', 'description')}
-          onSubmit={this.onSubmit}
-        /> */}
-      </div>
-    )
-  }
+const NoteEdit = props => {
+  const note = props.location.state.note
+  return (
+    <div>
+      <h3>Edit a Note</h3>
+      <NoteForm onNoteAdd={props.onNoteAdd} noteValues={note} />
+    </div>
+  )
 }
 
-export default NoteEdit
+export default withRouter(NoteEdit)

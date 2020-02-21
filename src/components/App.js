@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { BrowserRouter, Route } from 'react-router-dom'
 import Header from './Header'
 import Landing from './Landing'
-import NoteForm from './notes/NoteForm'
 import SavedNotes from './notes/SavedNotes'
 import NoteEdit from './notes/NoteEdit'
 import NoteCreate from './notes/NoteCreate'
@@ -19,8 +18,15 @@ class App extends Component {
   }
 
   handleNoteAdd = newNote => {
-    let newNotes = this.state.notes
+    let newNotes = this.state.notes.filter(note => note.id !== newNote.id)
     newNotes.unshift(newNote)
+    this.setState({ notes: newNotes })
+  }
+
+  handleNoteDelete = noteIdToBeDeleted => {
+    const newNotes = this.state.notes.filter(
+      note => note.id !== noteIdToBeDeleted.id
+    )
     this.setState({ notes: newNotes })
   }
 
@@ -34,9 +40,22 @@ class App extends Component {
         <div className="container">
           <Header />
           <Route path="/" exact component={Landing} />
-          <Route path="/notes" exact component={SavedNotes} />
-          {/* <Route path="/notes/edit/:id" exact component={NoteEdit} /> */}
-          <Route path="/notes/new" component={()=><NoteCreate onNoteAdd={this.handleNoteAdd}/>} />
+          <Route
+            path="/notes"
+            exact
+            component={() => (
+              <SavedNotes handleNoteDelete={this.handleNoteDelete} />
+            )}
+          />
+          <Route
+            path="/notes/edit/:id"
+            exact
+            component={() => <NoteEdit onNoteAdd={this.handleNoteAdd} />}
+          />
+          <Route
+            path="/notes/new"
+            component={() => <NoteCreate onNoteAdd={this.handleNoteAdd} />}
+          />
         </div>
       </BrowserRouter>
     )

@@ -1,10 +1,22 @@
 import React from 'react'
+import uuidv4 from 'uuid/v4'
+import { withRouter } from 'react-router-dom'
 
-export default class NoteForm extends React.Component {
+class NoteForm extends React.Component {
   state = {
     subject: '',
     text: '',
     id: ''
+  }
+
+  componentDidMount() {
+    if (this.props.noteValues) {
+      const { subject, text } = this.props.noteValues
+      this.setState({
+        subject,
+        text
+      })
+    }
   }
 
   handleTextChange = event => {
@@ -17,13 +29,20 @@ export default class NoteForm extends React.Component {
 
   handleNoteSubmit = () => {
     const { subject, text } = this.state
+    let id
+    if (this.props.noteValues) {
+      id = this.props.noteValues.id
+    } else {
+      id = uuidv4()
+    }
 
     this.props.onNoteAdd({
       subject,
       text,
-      id: Date.now()
+      id
     })
     this.setState({ subject: '', text: '' })
+    this.props.history.push('/')
   }
 
   render() {
@@ -64,3 +83,5 @@ export default class NoteForm extends React.Component {
     )
   }
 }
+
+export default withRouter(NoteForm)

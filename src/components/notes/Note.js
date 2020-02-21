@@ -1,7 +1,7 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
-const Note = ({ note }) => {
+const Note = ({ note, handleNoteDelete, history }) => {
   return (
     <div className="row">
       <div className="col s12 m6">
@@ -11,7 +11,26 @@ const Note = ({ note }) => {
             <p>{note.text}</p>
           </div>
           <div className="card-action" key={note.id}>
-            <Link to={`/notes/edit/${note.id}`}>Edit</Link>
+            <Link
+              to={{
+                pathname: `/notes/edit/${note.id}`,
+                state: {
+                  note
+                }
+              }}
+            >
+              Edit
+            </Link>
+
+            <button
+              className="waves-effect waves-light btn-small red"
+              onClick={() => {
+                handleNoteDelete(note)
+                history.push('/')
+              }}
+            >
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -19,4 +38,4 @@ const Note = ({ note }) => {
   )
 }
 
-export default Note
+export default withRouter(Note)
