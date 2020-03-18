@@ -7,13 +7,11 @@ class Header extends Component {
       <nav>
         <div className="nav-wrapper">
           <Link to={'/'} className="left brand-logo">
-            NOTES
+            POSTS
           </Link>
 
           <ul className="right">
-            <li>
-              <Link to="/notes">Saved Notes</Link>
-            </li>
+            <li>{/* <Link to="/notes">Saved Notes</Link> */}</li>
           </ul>
         </div>
       </nav>
