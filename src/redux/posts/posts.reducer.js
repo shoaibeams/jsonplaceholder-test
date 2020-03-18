@@ -9,6 +9,8 @@ export const postsReducer = (state = INITIAL_STATE, action) => {
         ...state,
         data: action.payload
       }
+    case PostActionTypes.SET_ERROR:
+      return { ...state, data: [], error: true }
     default:
       return state
   }

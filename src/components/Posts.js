@@ -3,12 +3,10 @@ import { connect } from 'react-redux'
 import { fetchPosts } from '../redux/posts/posts.actions'
 import './Posts.scss'
 
-const Posts = ({ fetchPosts, posts }) => {
+export const Posts = ({ fetchPosts, posts }) => {
   useEffect(() => {
     fetchPosts()
   }, [posts ? posts.length : null])
-
-  console.log('posts', posts)
 
   const getPostsForCurrentUser = posts => {
     if (posts) {
@@ -66,3 +64,4 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 export default connect(mapStateToProps, { fetchPosts })(Posts)
+
