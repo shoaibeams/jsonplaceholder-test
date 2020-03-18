@@ -1,1 +1,1 @@
-A simple Notes app developed with React. Uses localStorage to save the notes in user's browser.
+A simple test app to bring posts from jsonplaceholder and display it on the front.
